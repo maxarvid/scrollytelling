@@ -108,6 +108,9 @@ function ready(datapoints) {
       .selectAll('rect')
       .transition()
       .attr('fill', 'lightgrey')
+    d3.selectAll('.colored-text')
+      .style('background', 'none')
+      .style('color', 'black')
   })
 
   d3.select('#asia').on('stepin', () => {
@@ -119,6 +122,10 @@ function ready(datapoints) {
       .selectAll('.asia')
       .transition()
       .attr('fill', '#4cc1fc')
+    d3.selectAll('.asia-colored-text')
+      .transition()
+      .style('background', '#4cc1fc')
+      .style('color', 'white')
   })
 
   d3.select('#africa').on('stepin', () => {
@@ -131,6 +138,10 @@ function ready(datapoints) {
       .transition()
       .attr('fill', '#4cc1fc')
       .transition()
+    d3.selectAll('.africa-colored-text')
+      .transition()
+      .style('background', '#4cc1fc')
+      .style('color', 'white')
   })
 
   d3.select('#north-america').on('stepin', () => {
@@ -143,6 +154,10 @@ function ready(datapoints) {
       .transition()
       .attr('fill', '#4cc1fc')
       .transition()
+    d3.selectAll('.na-colored-text')
+      .transition()
+      .style('background', '#4cc1fc')
+      .style('color', 'white')
   })
 
   d3.select('#low-gdp').on('stepin', () => {
@@ -156,6 +171,10 @@ function ready(datapoints) {
           return 'lightgrey'
         }
       })
+    d3.selectAll('.gdp-colored-text')
+      .transition()
+      .style('background', '#4cc1fc')
+      .style('color', 'white')
   })
 
   d3.select('#continent').on('stepin', () => {
