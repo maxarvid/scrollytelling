@@ -12,7 +12,7 @@ var svg = d3
   .attr('height', height + margin.top + margin.bottom)
   .attr('width', width + margin.left + margin.right)
   .append('g')
-  .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+  .attr('transform', `translate(${margin.left}, ${margin.top})`)
 
 var radius = 200
 
@@ -57,16 +57,28 @@ d3.csv(require('./data/all-temps.csv'))
   .catch(err => console.log('Failed on', err))
 
 function ready(datapoints) {
-  var container = svg.append('g')
-    .attr('transform', 'translate(' + (width / 2) + ',' + (height / 2) + ')')
+  var container = svg
+    .append('g')
+    .attr('transform', `translate(${width / 2}, ${height / 2})`)
 
   datapoints.forEach(d => {
     d.high_temp = +d.high_temp
     d.low_temp = +d.low_temp
   })
 
+  console.log(datapoints)
+
+  var nested = d3
+    .nest()
+    .key(d => d.city)
+    .entries(datapoints)
+
+  console.log(nested)
+
+  var temperatureStore = d3.map([nested])
+  console.log(temperatureStore)
   // Filter it so I'm only looking at NYC datapoints
-  let nycDatapoints = datapoints.filter(d => d.city === 'Lima')
+  let nycDatapoints = datapoints.filter(d => d.city === 'NYC')
   nycDatapoints.push(nycDatapoints[0])
 
   container
@@ -90,9 +102,7 @@ function ready(datapoints) {
     .attr('stroke', 'gray')
     .attr('cx', 0)
     .attr('cy', 0)
-    .attr('r', function(d) {
-      return radiusScale(d)
-    })
+    .attr('r', d => radiusScale(d))
     .lower()
 
   container
@@ -116,5 +126,4 @@ function ready(datapoints) {
     .text(d => d + '°')
     .attr('text-anchor', 'middle')
     .attr('font-size', 8)
-
 }
