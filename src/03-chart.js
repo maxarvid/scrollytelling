@@ -244,6 +244,7 @@ function ready(datapoints) {
 
   // Tuscon step
   d3.select('#tuscon-step').on('stepin', () => {
+    console.log('Tuscon trigger')
     let cityDatapoints = temperatureStore.get('Tuscon')
     let cityHighTempMean = cityDatapoints.map(d => d.high_temp)
     cityDatapoints.push(cityDatapoints[0])
@@ -263,5 +264,5 @@ function ready(datapoints) {
     d3.selectAll('.label-Tuscon')
       .transition()
       .style('background', d => colorScale(d3.mean(cityHighTempMean)))
-  }) // Lima Step ends here
+  }) // Tuscon Step ends here
 }
